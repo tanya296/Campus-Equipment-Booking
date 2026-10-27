@@ -5,7 +5,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Source code is available in the workspace'
+                git branch: 'feature/booking-state-consistency',
+                    url: 'https://github.com/tanya296/Campus-Equipment-Booking.git'
             }
         }
 
@@ -15,7 +16,8 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    junit allowEmptyResults: true,
+                          testResults: 'target/surefire-reports/*.xml'
                 }
             }
         }
